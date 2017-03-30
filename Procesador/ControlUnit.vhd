@@ -11,32 +11,28 @@ architecture arq_ControlUnit of ControlUnit is
 
 --ALUOp <= "000000";--AND
 --ALUOp <= "000001";--OR
+--ORN
+--ANDN
 --ALUOp <= "000010";--XOR
 --ALUOp <= "000011";--XNOR
 
---ALUOp <= "000100";--SLL
---ALUOp <= "000101";--SRL
---ALUOp <= "000110";--SRA
+
 
 --ALUOp <= "000111";--ADD
 --ALUOp <= "001000";--SUB
 
---ALUOP<="001001";--CALL
---ALUOP<="001010";--JMPL
---ALUOP<="001011";--BRANCH
 
---ALUOP<="001011";--BRANCH
 signal op2 : std_logic_vector (2 downto 0) := "000";
 begin
 	process(op, op3) begin
 		case(op) is
-			when "00" =>
-				op2 <=op3(5 downto 3);
-				if(op2="010") then
-					ALUOp <="001011";
-				end if;
-			when "01" =>
-				ALUOP<="001001";--CALL
+		--	when "00" =>
+		--		op2 <=op3(5 downto 3);
+		--	if(op2="010") then
+		--	ALUOp <="001011";
+		--		end if;
+		--	when "01" =>
+			--	ALUOP<="001001";--CALL
 			when "10" =>
 				if(op3="000001") then--AND
 					ALUOp <= "000000";
@@ -50,15 +46,15 @@ begin
 				if(op3="000111") then--	XNOR
 					ALUOp <= "000011";
 				end if;
-				if(op3="100101") then--	SLL
-					ALUOp <= "000100";
-				end if;
-				if(op3="100110") then--	SRL
-					ALUOp <= "000101";
-				end if;
-				if(op3="100110") then--	SRA
-					ALUOp <= "000110";
-				end if;
+			--	if(op3="100101") then--	SLL
+				--	ALUOp <= "000100";
+				--end if;
+			--	if(op3="100110") then--	SRL
+				--	ALUOp <= "000101";
+			--	end if;
+			--	if(op3="100110") then--	SRA
+				--	ALUOp <= "000110";
+				--end if;
 				
 				if(op3="000000") then--	ADD
 					ALUOp <= "000111";
@@ -66,15 +62,21 @@ begin
 				if(op3="000100") then--	SUB
 					ALUOp <= "001000";
 				end if;
-				
-				if(op3="111000") then--JMPL
-					ALUOp <= "001010";
+				if(op3="000101") then--	ANDN
+					ALUOp <= "001101";
+				end if;
+					if(op3="000110") then--	ORN
+					ALUOp <= "001110";
 				end if;
 				
-				if(op3="010100") then--SUBcc
-					ALUOp <= "001100";
-				end if;
+			--	if(op3="111000") then--JMPL
+			--		ALUOp <= "001010";
+			--	end if;
 				
+			--	if(op3="010100") then--SUBcc
+				--	ALUOp <= "001100";
+			--	end if;
+			
 
 			--when "11" =>
 			when others => null;
