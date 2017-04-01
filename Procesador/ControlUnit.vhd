@@ -72,7 +72,7 @@ begin
 			--	if(op3="111000") then--JMPL
 			--		ALUOp <= "001010";
 			--	end if;
-				
+			
 			--	if(op3="010100") then--SUBcc
 				--	ALUOp <= "001100";
 			--	end if;
